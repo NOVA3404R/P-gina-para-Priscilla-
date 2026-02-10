@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rosa para Priscilla 🌹</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle, #ffe6f0, #ff99c8);
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  .rose-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .petal {
+    position: absolute;
+    width: 60px;
+    height: 120px;
+    background: linear-gradient(to top, #ff4da6, #ff1a75);
+    border-radius: 50% 50% 50% 50%;
+    transform-origin: bottom center;
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+  }
+
+  .text-container {
+    width: 80%;
+    text-align: center;
+    color: #900048;
+    font-size: 18px;
+    line-height: 1.5em;
+    min-height: 120px;
+  }
+
+  .message {
+    opacity: 0;
+    transition: opacity 1s;
+    margin: 10px 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="rose-container" id="rose">
+  <div class="petal" style="transform: rotate(0deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(45deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(90deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(135deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(180deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(225deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(270deg) translateY(0px)"></div>
+  <div class="petal" style="transform: rotate(315deg) translateY(0px)"></div>
+</div>
+
+<div class="text-container" id="messages">
+  <p class="message">Priscilla, te elijo a ti antes que cualquier sueño material 💖</p>
+  <p class="message">Quiero que estés en mi vida, siempre como mi compañera de aventuras y sueños 🌹</p>
+  <p class="message">Nuestras diferencias nos hacen más fuertes y compatibles; aprendemos uno del otro ❤️</p>
+  <p class="message">Quiero construir un futuro juntos, como un equipo que se apoya y se entiende 💑</p>
+  <p class="message">La bb que soñamos juntos llegará, y sé que todo será más hermoso a tu lado 👶💞</p>
+  <p class="message">Mi deseo más grande: que seas mi esposa y que vivamos nuestra historia de amor 🌟💍</p>
+  <p class="message final-message">Y sobre todo… TE AMO con todo mi corazón 💖🌹</p>
+</div>
+
+<audio id="bloomSound" src="https://www.soundjay.com/nature/sounds/bird-1.mp3"></audio>
+
+<script>
+  const rose = document.getElementById('rose');
+  const petals = document.querySelectorAll('.petal');
+  const messages = document.querySelectorAll('.message');
+  const bloomSound = document.getElementById('bloomSound');
+
+  let step = 0; // Controla qué mensaje y pétal se muestra
+
+  rose.addEventListener('click', () => {
+    if (step < petals.length) {
+      // Hacer florecer un pétalo
+      const petal = petals[step];
+      let angle = step * 45;
+      petal.style.opacity = 1;
+      petal.style.transform = `rotate(${angle}deg) translateY(-80px)`;
+
+      // Mostrar el mensaje correspondiente
+      if (step < messages.length - 1) {
+        messages[step].style.opacity = 1;
+      } else {
+        messages[messages.length - 1].style.opacity = 1; // Mensaje final
+      }
+
+      playSound();
+      vibrate();
+
+      step++;
+    }
+  });
+
+  function playSound() {
+    bloomSound.currentTime = 0;
+    bloomSound.play();
+  }
+
+  function vibrate() {
+    if (navigator.vibrate) {
+      navigator.vibrate([100, 50, 100]);
+    }
+  }
+</script>
+
+</body>
+</html>
